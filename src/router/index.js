@@ -1,14 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Center from '@/view/Center'
 import PersonInfo from '@/view/PersonInfo'
 import Safe from '@/view/Safe'
 import Address from '@/view/Address'
 import Order from '@/view/Order'
+import Collection from '@/view/Collection'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // Person Info
+    {
+      path: '/Center',
+      name: 'Center',
+      component: Center
+    },
     {
       path: '/PersonInfo',
       name: 'PersonInfo',
@@ -28,6 +35,11 @@ export default new Router({
       path: '/Order',
       name: 'Order',
       component: Order
+    },
+    {
+      path: '/Collection',
+      name: 'Collection',
+      component: Collection
     }
   ]
 })

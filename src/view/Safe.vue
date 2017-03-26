@@ -3,16 +3,7 @@
     <SubTitle word1="账户安全" word2="Set up Safety"></SubTitle>
     <div class="content">
       <!--个人信息-->
-      <Row>
-        <Col span="4">
-        <img src="http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg" alt="logo" class="img">
-        </Col>
-        <Col span="16" class="hehe">
-        <p>用户名:小叮当</p>
-        <p>铜牌会员</p>
-        <p>账户安全:60分</p>
-        </Col>
-      </Row>
+      <UserInfo></UserInfo>
 
       <!--详情-->
       <Row style="margin-top: 30px;">
@@ -149,19 +140,6 @@
     background-color: #F69954;
   }
 
-  .hehe {
-    padding: 60px;
-  }
-
-  .hehe p {
-    margin-bottom: 10px;
-  }
-
-  .img {
-    border-radius: 50%;
-    border: 10px solid yellow;
-  }
-
   .content {
     padding: 20px;
   }
@@ -169,8 +147,9 @@
 
 <script>
   import SubTitle from '@/components/SubTitle'
+  import UserInfo from '@/components/UserInfo'
   export default {
-    components: {SubTitle},
+    components: {SubTitle,UserInfo},
   }
 
 </script>

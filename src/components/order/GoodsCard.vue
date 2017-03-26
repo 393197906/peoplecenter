@@ -56,7 +56,7 @@
       <Col span="3">
       交易成功<br><br>订单详情<br><br>查看物流</Col>
       <Col span="3">
-      删除订单</Col>
+      <Button type="error">删除订单</Button></Col>
     </Row>
   </div>
 </template>

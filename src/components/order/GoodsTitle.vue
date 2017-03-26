@@ -3,8 +3,7 @@
     <Col span="8">商品</Col>
     <Col span="2">单价</Col>
     <Col span="2">数量</Col>
-    <Col span="3">商品操作</Col>
-    <Col span="3">合计</Col>
+    <Col span="6" style="text-align: center">合计</Col>
     <Col span="3">交易状态</Col>
     <Col span="3">交易操作</Col>
   </Row>

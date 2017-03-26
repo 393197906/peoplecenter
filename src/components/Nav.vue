@@ -1,6 +1,5 @@
 <template>
   <div class="nav-container">
-    <div class="nav-title"><strong>个人中心</strong></div>
     <div class="nav-box" v-for=" (v1,i1) in item">
       <p v-for="(v2,i2) in v1">
         <strong v-if="!v2.path">{{v2.name}}</strong>
@@ -19,12 +18,22 @@
       return {
         isActive: '',
         item: [
+            [
+              {
+                  name:"个人中心"
+              },
+              {
+                  name:"个人中心",
+                  path:'#/Center'
+              }
+            ]
+            ,
           [
             {
               name: "个人信息"
             },
             {
-              name: "收货地址",
+              name: "个人信息",
               path: "#/PersonInfo"
             },
             {
@@ -44,44 +53,44 @@
               name: "订单管理",
               path: '#/Order'
             },
-            {
-              name: "退款售后",
-              path: '#/'
-            }
+//            {
+//              name: "退款售后",
+//              path: '#/'
+//            }
           ],
-          [
-            {
-              name: "我的资产"
-            },
-            {
-              name: "退款售后",
-              path: '#/'
-            },
-            {
-              name: "账单明细",
-              path: '#/'
-            }
-          ],
+//          [
+//            {
+//              name: "我的资产"
+//            },
+//            {
+//              name: "退款售后",
+//              path: '#/'
+//            },
+//            {
+//              name: "账单明细",
+//              path: '#/'
+//            }
+//          ],
           [
             {
               name: "我的小窝"
             },
             {
               name: "收藏",
-              path: '#/'
+              path: '#/Collection'
             },
-            {
-              name: "足迹",
-              path: '#/'
-            },
-            {
-              name: "评价",
-              path: '#/'
-            },
-            {
-              name: "信息",
-              path: '#/'
-            }
+//            {
+//              name: "足迹",
+//              path: '#/'
+//            },
+//            {
+//              name: "评价",
+//              path: '#/'
+//            },
+//            {
+//              name: "信息",
+//              path: '#/'
+//            }
           ]
         ]
       }

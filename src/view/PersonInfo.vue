@@ -3,16 +3,7 @@
     <SubTitle word1="个人资料" word2="Personal information"></SubTitle>
     <div class="content">
       <!--个人信息-->
-      <Row>
-        <Col span="4">
-        <img src="http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg" alt="logo" class="img">
-        </Col>
-        <Col span="16" class="hehe">
-        <p>用户名:小叮当{{test}}</p>
-        <p>铜牌会员</p>
-        <p>账户安全:60分</p>
-        </Col>
-      </Row>
+      <UserInfo></UserInfo>
       <!--详情-->
       <div style="margin-top: 30px;padding: 10px;">
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
@@ -71,8 +62,9 @@
 
 <script>
   import SubTitle from '@/components/SubTitle'
+  import UserInfo from '@/components/UserInfo'
   export default {
-    components: {SubTitle},
+    components: {SubTitle,UserInfo},
     beforeRouteEnter(to, form, next){
       setTimeout(() => {
         next(vm => {

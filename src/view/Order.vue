@@ -6,6 +6,11 @@
         <Tab-pane label="所有订单" name="all">
           <GoodsTitle></GoodsTitle>
           <GoodsCard></GoodsCard>
+          <div class="page-container">
+            <div>
+            <Page :total="100"></Page>
+            </div>
+          </div>
         </Tab-pane>
         <Tab-pane label="待付款" name="waitPay">
           <GoodsTitle></GoodsTitle>
@@ -24,7 +29,12 @@
   </div>
 </template>
 <style scoped>
-
+  .page-container{
+    margin-top: 20px;
+  }
+  .page-container div{
+    float: right;
+  }
   .content {
     padding: 20px;
   }
