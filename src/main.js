@@ -3,11 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import '@/assets/css/app.less'   // 自定义样式
-
 import iView from 'iview'
+import VueResource from 'vue-resource';
 
+Vue.use(VueResource);
 Vue.use(iView);
+
+Vue.http.options.xhr = { withCredentials: true }
+
+
+
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
@@ -23,6 +30,7 @@ router.afterEach((to, from, next) => {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: {App}
 });

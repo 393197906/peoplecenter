@@ -14,7 +14,34 @@ export default new Router({
     {
       path: '/Center',
       name: 'Center',
-      component: Center
+      component: Center,
+      children: [
+        {
+          path: "waitPay",
+          name: "waitPay",
+          component: Order,
+        }, {
+          path: "waitSend",
+          name: "waitSend",
+          component: Order,
+        }, {
+          path: "waitReceive",
+          name: "waitReceive",
+          component: Order,
+        }, {
+          path: "waitComment",
+          name: "waitComment",
+          component: Order,
+        }, {
+          path: "returnGoods",
+          name: "returnGoods",
+          component: Order,
+        },{
+          path: "collection",
+          name: "collection",
+          component: Collection,
+        }
+      ]
     },
     {
       path: '/PersonInfo',

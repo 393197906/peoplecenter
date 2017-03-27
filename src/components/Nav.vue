@@ -9,25 +9,25 @@
   </div>
 </template>
 <script>
+  import router from "@/router"
   export default {
     methods: {
-      changeActive(){
-      }
+        //TODO
     },
     data(){
       return {
         isActive: '',
         item: [
-            [
-              {
-                  name:"个人中心"
-              },
-              {
-                  name:"个人中心",
-                  path:'#/Center'
-              }
-            ]
-            ,
+          [
+            {
+              name: "个人中心"
+            },
+            {
+              name: "个人中心",
+              path: '#/Center'
+            }
+          ]
+          ,
           [
             {
               name: "个人信息"

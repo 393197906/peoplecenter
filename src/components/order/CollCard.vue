@@ -1,21 +1,42 @@
 <template>
   <div class="container">
     <div class="img-container">
-      <img src="http://tpl.amazeui.org/template/10/shop/one/images/kouhong.jpg_80x80.jpg" alt="gooods">
+      <img :src="goodsImg" alt="gooods">
     </div>
     <div class="content">
-      <p>¥42.50</p>
-      <p>包邮s925</p>
+      <p>¥{{goodsPrice}} <span style="color:#fb9f33"> * {{goodsNum}}</span></p>
+      <p>{{goodsTitle}}</p>
     </div>
   </div>
 </template>
-<script></script>
+<script>
+  export  default{
+    props: {
+      goodsId: {
+        type: Number
+      },
+      goodsImg: {
+        type: String
+      },
+      goodsTitle: {
+        type: String
+      }
+      , goodsPrice: {
+        type: Number
+      }
+      , goodsNum: {
+        type: Number
+      }
+    }
+  }
+</script>
 <style scoped>
   .container {
     border: 1px solid #e3e8ee;
     border-radius: 2px;
   }
-  .container:hover{
+
+  .container:hover {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   }
 
@@ -28,15 +49,18 @@
     height: 100%;
   }
 
-  .content{
+  .content {
     padding: 10px;
+    font-size: 12px;
   }
+
   .content p:first-child {
     color: #f40;
   }
 
   .content p:last-child {
-    margin-top: 5px;
+    margin-top: 3px;
+    line-height: 18px;
   }
 
 
