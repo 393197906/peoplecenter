@@ -143,7 +143,7 @@
   export default {
     components: {ShippingCard, UserInfo, SubTitle, CollCard},
     created(){
-      const label = ['Shipping', 'Shopcar', 'Collection', 'Growup'];
+      const label = ['Shipping', 'Shopcar', 'Collection','Growup'];
       for (let index of label) {
         let lab = index.toLowerCase();
         if (this.$store.state.userInfo[lab]) {
@@ -187,7 +187,7 @@
           shipping: true,
           shopcar: true,
           collection: true,
-          growup: false,
+          growup: true,
           hot: true
         },
         modal: { //模态框路由

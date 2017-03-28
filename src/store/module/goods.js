@@ -11,6 +11,14 @@ export default {
   },
   mutations: {
     /**
+     * 设置信息
+     * @param state
+     * @param data
+     */
+      [type.SET_INFO](state, {index, data}){
+      state[index] = data;
+    },
+    /**
      * 添加物流信息
      * @param state
      * @param goodsId
@@ -18,7 +26,6 @@ export default {
      */
       [type.ADD_SHIPPING_INFO](state, {shippingId, content}){
       state.shippingDetailMap.set(shippingId, content);
-      console.log(state.shippingDetailMap);
     }
   },
   actions: {

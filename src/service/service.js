@@ -140,7 +140,7 @@ export default  {
             content: "账号注册成功"
           }
         ])
-      }, 9000)
+      }, 3000)
     })
 
   },
@@ -220,6 +220,11 @@ export default  {
     })
   },
 
+  /**
+   * 确认收货
+   * @param shippingId
+   * @returns {Promise}
+   */
 
   confirmReceive(shippingId){
         return new Promise((res,rej)=>{

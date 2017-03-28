@@ -29,17 +29,19 @@
   import SubTitle from '@/components/SubTitle';
   import CollCard from '@/components/order/CollCard';
   export default{
-      components:{SubTitle,CollCard}
+    components: {SubTitle, CollCard}
   }
 </script>
 <style scoped>
-.card-container{
-  padding: 5px;
-}
-.page-container{
-  margin-top: 20px;
-}
-.page-container div{
-  float: right;
-}
+  .card-container {
+    padding: 5px;
+  }
+
+  .page-container {
+    margin-top: 20px;
+  }
+
+  .page-container div {
+    float: right;
+  }
 </style>
