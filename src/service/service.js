@@ -10,7 +10,12 @@ export default  {
           title1: "谢利朋",
           title2: "vuex",
           title3: "hello vue",
-          img: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg"
+          img: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+          aname:"远在远方的风",
+          name:"谢利朋",
+          birthday:new Date("2017-07-21"),
+          gender:"male",
+          desc:"我是远在远方的风，你他妈的是谁"
         });
       }, 1000)
     })
@@ -232,6 +237,19 @@ export default  {
             res(true)
           },10)
         })
+  },
+
+  /**
+   * 更新用户信息
+   * @param userInfo
+   * @returns {Promise}
+   */
+  updateUserInfo(userInfo){
+    return new Promise((res,rej)=>{
+      setTimeout(()=>{
+        res(true);
+      },1000)
+    })
   }
 
 }

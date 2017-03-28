@@ -143,7 +143,7 @@
   export default {
     components: {ShippingCard, UserInfo, SubTitle, CollCard},
     created(){
-      const label = ['Shipping', 'Shopcar', 'Collection','Growup'];
+      const label = ['Shipping', 'Shopcar', 'Collection', 'Growup'];
       for (let index of label) {
         let lab = index.toLowerCase();
         if (this.$store.state.userInfo[lab]) {
@@ -151,12 +151,7 @@
         } else {
           this.$store.dispatch(`init${index}`).then(() => {
             this.load[lab] = false;
-          }).catch(err => {
-            this.$Notice.error({
-              title: '错误',
-              desc: err
-            });
-          });
+          }).catch(this.doError);
         }
       }
       //热卖商品
@@ -165,12 +160,7 @@
       } else {
         this.$store.dispatch('initHot').then(() => {
           this.load.hot = false;
-        }).catch(err => {
-          this.$Notice.error({
-            title: '错误',
-            desc: err
-          });
-        });
+        }).catch(this.doError);
       }
     },
     computed: {

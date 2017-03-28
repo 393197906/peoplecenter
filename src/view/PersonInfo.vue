@@ -5,8 +5,9 @@
       <!--个人信息-->
       <UserInfo></UserInfo>
       <!--详情-->
-      <div style="margin-top: 30px;padding: 10px;">
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+      <div style="margin-top: 30px;padding: 10px;position: relative">
+        <Spin size="large" fix v-if="load.userInfo"></Spin> <!-- 加载动画-->
+        <Form ref="formValidate" v-if="!load.userInfo" :model="formValidate" :rules="ruleValidate" :label-width="80">
           <Form-item label="昵称" prop="aname">
             <Input v-model="formValidate.aname" placeholder="请输入昵称"></Input>
           </Form-item>
@@ -14,8 +15,8 @@
             <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
           </Form-item>
           <Form-item label="选择日期">
-            <Form-item prop="date">
-              <Date-picker type="date" placeholder="选择日期" v-model="formValidate.date"></Date-picker>
+            <Form-item prop="birthday1">
+              <Date-picker type="date" placeholder="选择日期" v-model="formValidate.birthday"></Date-picker>
             </Form-item>
           </Form-item>
           <Form-item label="性别" prop="gender">
@@ -30,8 +31,7 @@
                    placeholder="请输入个人介绍..."></Input>
           </Form-item>
           <Form-item>
-            <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
-            <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+            <Button type="primary" :loading='load.submit' size="large" @click="handleSubmit('formValidate')">保存</Button>
           </Form-item>
         </Form>
       </div>
@@ -63,25 +63,21 @@
 <script>
   import SubTitle from '@/components/SubTitle'
   import UserInfo from '@/components/UserInfo'
+  import service from '@/service/service'
   export default {
-    components: {SubTitle,UserInfo},
-    beforeRouteEnter(to, form, next){
-      setTimeout(() => {
-        next(vm => {
-          vm.test = "hellow world";
-        })
-      })
+    components: {SubTitle, UserInfo},
+    created(){  //初始化数据
+      service.getUserinfo().then((data) => {
+        this.formValidate = data;
+        this.load.userInfo = false;
+      }).catch(this.doError);
     },
     data () {
       return {
-        test: null,
-        formValidate: {
-          aname: '',
-          name: '',
-          mail: '',
-          desc: '',
-          gender: '',
-          date: ''
+        formValidate: null,
+        load: {
+          userInfo: true, //数据加载等待
+          submit: false   //提交加载等待
         },
         ruleValidate: {
           aname: [
@@ -93,8 +89,8 @@
           gender: [
             {required: true, message: '请选择性别', trigger: 'change'}
           ],
-          date: [
-            {required: true, type: 'date', message: '请选择生日', trigger: 'change'}
+          birthday: [
+            {required: true, type: 'data', message: '请选择生日', trigger: 'change'}
           ],
           desc: [
             {required: true, message: '请输入个人介绍', trigger: 'blur'},
@@ -107,14 +103,15 @@
       handleSubmit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.$Message.success('提交成功!')
+            this.load.submit = true;
+            this.$store.dispatch('updateUserInfo', this.formValidate).then(() => {
+              this.doSuccess('用户信息更新成功');
+              this.load.submit = false;
+            }).catch(this.doError);
           } else {
             this.$Message.error('表单验证失败!')
           }
         })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields()
       }
     }
   }
