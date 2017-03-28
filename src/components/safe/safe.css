@@ -1,0 +1,38 @@
+.p-margin {
+  margin-top: 16px;
+}
+
+.center {
+  text-align: center;
+}
+
+.icon-f {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 28px;
+  border-radius: 50%;
+  font-color: #fff;
+}
+
+.icon-c-1 {
+  background-color: #F99798;
+}
+
+.icon-c-2 {
+  background-color: #C9C9C9;
+}
+
+.icon-c-3 {
+  background-color: #FF6262;
+}
+
+.icon-c-4 {
+  background-color: #609CE3;
+}
+
+.icon-c-5 {
+  background-color: #F69954;
+}
