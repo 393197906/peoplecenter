@@ -11,11 +11,11 @@ export default  {
           title2: "vuex",
           title3: "hello vue",
           img: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
-          aname:"远在远方的风",
-          name:"谢利朋",
-          birthday:new Date("2017-07-21"),
-          gender:"male",
-          desc:"我是远在远方的风，你他妈的是谁"
+          aname: "远在远方的风",
+          name: "谢利朋",
+          birthday: new Date("2017-07-21"),
+          gender: "male",
+          desc: "我是远在远方的风，你他妈的是谁"
         });
       }, 1000)
     })
@@ -47,7 +47,6 @@ export default  {
     })
   },
 
-
   /**
    * 获取用户购物车信息
    * @returns {Promise}
@@ -73,7 +72,6 @@ export default  {
       }, 5000)
     })
   },
-
 
   /**
    * 获取用户收藏夹信息
@@ -232,11 +230,11 @@ export default  {
    */
 
   confirmReceive(shippingId){
-        return new Promise((res,rej)=>{
-          setTimeout(()=>{
-            res(true)
-          },10)
-        })
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 10)
+    })
   },
 
   /**
@@ -245,10 +243,22 @@ export default  {
    * @returns {Promise}
    */
   updateUserInfo(userInfo){
-    return new Promise((res,rej)=>{
-      setTimeout(()=>{
+    return new Promise((res, rej) => {
+      setTimeout(() => {
         res(true);
-      },1000)
+      }, 1000)
+    })
+  },
+
+  /**
+   * 修改密码
+   * @returns {Promise}
+   */
+  changePassword({oldPassword, newPassword}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
     })
   }
 
