@@ -46,6 +46,7 @@ export default {
      */
     async initUserInfo({commit}){
       const userinfo = await service.getUserinfo();
+      console.log('dispacth');
       commit(type.SET_INFO, {
         index: 'userInfo',
         data: userinfo
@@ -99,6 +100,17 @@ export default {
         index: 'growup',
         data: growup
       });
+    },
+    /**
+     * 更新用户信息
+     * @param commit
+     * @param userInfo
+     * @returns {Promise.<void>}
+     */
+    async updateUserInfo({dispatch},userInfo){
+      await service.updateUserInfo(userInfo);
+      await dispatch('initUserInfo');
     }
+
   }
 }

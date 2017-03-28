@@ -23,12 +23,7 @@
         this.toggle = false;
         return;
       }
-      await this.$store.dispatch('initUserInfo').catch(e => {
-        this.$Notice.error({
-          title: '错误',
-          desc: e
-        });
-      });
+      await this.$store.dispatch('initUserInfo').catch(this.doError);
       this.toggle = false;
     },
     computed: {
