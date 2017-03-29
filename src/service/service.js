@@ -440,6 +440,15 @@ export default  {
         res(true);
       }, 3000)
     })
+  },
+
+  addAddress(address){
+    console.log(address);
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 3000)
+    })
   }
 
 }
