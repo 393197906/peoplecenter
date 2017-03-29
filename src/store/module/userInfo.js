@@ -10,7 +10,8 @@ export default {
     shipping: null,  //用户物流信息
     shopcar: null,   //用户购物车信息
     collection: null,  //用户收藏夹信息
-    growup: null         //用户成长信息
+    growup: null,         //用户成长信息
+    address:null
   },
   mutations: {
     /**
@@ -49,6 +50,20 @@ export default {
         data: userinfo
       });
     },
+
+    /**
+     * 初始化收货地址
+     * @param commit
+     * @returns {Promise.<void>}
+     */
+    async initAddress({commit}){
+      const address = await service.getAddress();
+      commit(type.SET_INFO, {
+        index: 'address',
+        data: address
+      });
+    },
+
     /**
      * 初始化用户物流信息
      * @param commit

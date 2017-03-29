@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <SubTitle word1="地址管理" word2="Address list"></SubTitle>
-    <div class="address-container">
-      <MyAddress class="fl"></MyAddress>
-      <MyAddress class="fl"></MyAddress>
+    <div class="address-list">
+      <Spin size="large" fix v-if="addressLoading"></Spin> <!-- 加载动画-->
+      <div class="address-container" v-if="!addressLoading">
+        <MyAddress class="fl" v-for="(item,key) in address" :key='key' :address="item" :class="{active:item.is_default}"></MyAddress>
+      </div>
     </div>
 
     <SubTitle word1="新增地址" word2="Add Address" style="margin-top: 30px;"></SubTitle>
@@ -31,51 +33,33 @@
   </div>
 </template>
 
-<style scoped>
-  .form-container {
-    padding:20px;
-  }
-
-  .address-container {
-    margin-top: 20px;
-    padding:20px;
-  }
-
-  .address-container:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-
-  }
-
-  .fl {
-    float: left;
-    margin-right: 10px;
-  }
-</style>
-
 <script>
   import SubTitle from '@/components/SubTitle';
   import MyAddress from '@/components/MyAddress';
   import three from '@/components/ThreeAddress';
   export default {
-    components: {SubTitle, MyAddress,three},
-    beforeRouteEnter(to, form, next){
-      setTimeout(() => {
-        next(vm => {
-          vm.test = "hellow world";
-        })
-      })
+    components: {SubTitle, MyAddress, three},
+    created(){
+      if (this.$store.state.userInfo.address) {
+        this.addressLoading = false;
+      } else {
+        this.$store.dispatch('initAddress').then(() => {
+          this.addressLoading = false;
+        }).catch(this.doError);
+      }
+    },
+    computed: {
+      address(){
+        return this.$store.state.userInfo.address;
+      }
     },
     data () {
       return {
-        test: null,
+        addressLoading: true,
         formValidate: {
           aname: '',
-          phone:'',
-          detailAddress:''
+          phone: '',
+          detailAddress: ''
         },
         ruleValidate: {
           aname: [
@@ -108,3 +92,32 @@
   }
 
 </script>
+
+<style scoped>
+  .address-list {
+    position: relative;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  .address-container {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .address-container:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+
+  }
+
+  .fl {
+    float: left;
+    margin-right: 10px;
+  }
+</style>
