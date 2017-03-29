@@ -16,9 +16,9 @@ export default  {
           birthday: new Date("2017-07-21"),
           gender: "male",
           desc: "我是远在远方的风，你他妈的是谁",
-          phone:"",
-          email:"",
-          payPassword:""
+          phone: "",
+          email: "",
+          payPassword: ""
         });
       }, 1000)
     })
@@ -378,5 +378,77 @@ export default  {
       }, 3000)
     })
   },
+
+  /**
+   * 获取收货地址
+   * @returns {Promise}
+   */
+  getAddress(){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res([
+          {
+            id: 1,
+            user_name: "达文西",
+            contaceperson: "达文西收货",
+            province: "山东",
+            city: "菏泽",
+            districe: "成武",
+            mobile_phone: "1888888888",
+            address: "你好，你在哪呢",
+            zipcode: "274200",
+            is_default: 0
+          },
+          {
+            id: 2,
+            user_name: "达文西2",
+            contaceperson: "达文西2",
+            province: "山东",
+            city: "菏泽",
+            districe: "成武",
+            mobile_phone: "1888888888",
+            address: "我是二号收货地址",
+            zipcode: "274200",
+            is_default: 1
+          }
+        ])
+      }, 3000)
+    })
+  },
+
+  /**
+   * 设置默认收货地址
+   * @param id
+   * @returns {Promise}
+   */
+  setDefaultAddress({id}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 3000)
+    })
+  },
+
+  /**
+   * 删除收货地址
+   * @param id
+   * @returns {Promise}
+   */
+  removeAddress({id}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 3000)
+    })
+  },
+
+  addAddress(address){
+    console.log(address);
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 3000)
+    })
+  }
 
 }

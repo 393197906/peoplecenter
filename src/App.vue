@@ -25,7 +25,6 @@
 </script>
 
 <style>
-
   .right {
     float: right;
     width: 84%;
