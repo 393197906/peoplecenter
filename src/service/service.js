@@ -15,7 +15,10 @@ export default  {
           name: "谢利朋",
           birthday: new Date("2017-07-21"),
           gender: "male",
-          desc: "我是远在远方的风，你他妈的是谁"
+          desc: "我是远在远方的风，你他妈的是谁",
+          phone:"",
+          email:"",
+          payPassword:""
         });
       }, 1000)
     })
@@ -251,7 +254,9 @@ export default  {
   },
 
   /**
-   * 修改密码
+   * 修改登录密码
+   * @param oldPassword
+   * @param newPassword
    * @returns {Promise}
    */
   changePassword({oldPassword, newPassword}){
@@ -260,6 +265,118 @@ export default  {
         res(true)
       }, 3000)
     })
-  }
+  },
+
+  /**
+   * 设置登录密码
+   * @param payPassword
+   * @returns {Promise}
+   */
+  setPayPassword({payPassword}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 修改支付密码
+   * @param payPassword
+   * @param newPayPassword
+   * @returns {Promise}
+   */
+  changePayPassword({payPassword, newPayPassword}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 发送手机验证码
+   * @param phone
+   * @returns {Promise}
+   */
+  sendPhoneVcode({phone}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 设置手机
+   * @param phone
+   * @param vcode
+   * @returns {Promise}
+   */
+  setPhone({phone, vcode}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 换绑手机
+   * @param oldPhone
+   * @param phone
+   * @param vcode
+   * @returns {Promise}
+   */
+  changePhone({oldPhone, phone, vcode}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 发送邮箱验证码
+   * @param eamil
+   * @returns {Promise}
+   */
+  sendEmailVcode({eamil}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 设置邮箱
+   * @param email
+   * @param vcode
+   * @returns {Promise}
+   */
+  setEmail({email, vcode}){
+    console.log(email);
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
+
+  /**
+   * 修改邮箱
+   * @param oldEmail
+   * @param eamil
+   * @param vcode
+   * @returns {Promise}
+   */
+  changeEmail({oldEmail, eamil, vcode}){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true)
+      }, 3000)
+    })
+  },
 
 }
