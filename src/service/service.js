@@ -393,8 +393,8 @@ export default  {
             contaceperson: "达文西收货",
             province: "山东",
             city: "菏泽",
-            districe: "成武",
-            mobile_phone: "1888888888",
+            districe: "成武县",
+            mobile_phone: "13583103635",
             address: "你好，你在哪呢",
             zipcode: "274200",
             is_default: 0
@@ -405,8 +405,8 @@ export default  {
             contaceperson: "达文西2",
             province: "山东",
             city: "菏泽",
-            districe: "成武",
-            mobile_phone: "1888888888",
+            districe: "曹县",
+            mobile_phone: "13771998358",
             address: "我是二号收货地址",
             zipcode: "274200",
             is_default: 1
@@ -442,7 +442,25 @@ export default  {
     })
   },
 
+  /**
+   * 新增收货地址
+   * @param address
+   * @returns {Promise}
+   */
   addAddress(address){
+    console.log(address);
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 3000)
+    })
+  },
+  /**
+   * 编辑收货地址
+   * @param address
+   * @returns {Promise}
+   */
+  editAddress(address){
     console.log(address);
     return new Promise((res, rej) => {
       setTimeout(() => {

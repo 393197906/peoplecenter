@@ -53,7 +53,6 @@
 <script>
   import './safe.css'  //样式
   import service from '@/service/service'
-  const emailV = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
   export default{
     props: {
       email: {
@@ -62,7 +61,7 @@
     },
     methods: {
       getVcode(){
-        if (!emailV.test(this.form.email)) {
+        if (!this.$const.emailV.test(this.form.email)) {
           this.doError("邮箱格式不正确");
           return;
         }
@@ -125,7 +124,7 @@
             {required: true, message: '邮箱不能为空', trigger: 'blur'},
             {
               validator: (rule, value, callback) => {
-                if (!(emailV.test(value))) {
+                if (!(this.$const.emailV.test(value))) {
                   callback(new Error('邮箱格式不正确!'));
                 } else {
                   callback();
@@ -137,7 +136,7 @@
             {required: true, message: '邮箱不能为空', trigger: 'blur'},
             {
               validator: (rule, value, callback) => {
-                if (!(emailV.test(value))) {
+                if (!(this.$const.emailV.test(value))) {
                   callback(new Error('邮箱格式不正确!'));
                 } else {
                   callback();
