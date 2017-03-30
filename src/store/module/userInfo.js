@@ -11,7 +11,24 @@ export default {
     shopcar: null,   //用户购物车信息
     collection: null,  //用户收藏夹信息
     growup: null,         //用户成长信息
-    address:null
+    address: null,        //用户收货地址信息
+    order: null,          //用户全部订单
+    orderCount: null,      //用户全部订单总数
+
+    order0: null,          //用户待付款订单
+    orderCount0: null,      //用户待付款订单总数
+
+    order1: null,          //用户代发货订单
+    orderCount1: null,      //用户代发货订单总数
+
+    order2: null,          //用户待收货订单
+    orderCount2: null,      //用户待收货订单总数
+
+    order3: null,          //用户待评价订单
+    orderCount3: null,      //用户待评价订单总数
+
+    order4: null,          //用户退换货订单
+    orderCount4: null,      //用户退换货订单总数
   },
   mutations: {
     /**
@@ -38,6 +55,31 @@ export default {
     }
   },
   actions: {
+
+    /**
+     * 初始化订单数据
+     * @param commit
+     * @param pnum
+     * @param psize
+     * @param type
+     * @returns {Promise.<void>}
+     */
+    async initOrder({commit}, {pnum, psize, label}){
+      if (isNaN(label)) {
+        label = '';
+      }
+      const order = await service.getOrder({pnum, psize, label});
+      const count = await service.getOrderCount({label});
+      commit(type.SET_INFO, {
+        index: `order${label}`,
+        data: order
+      });
+      commit(type.SET_INFO, {
+        index: `orderCount${label}`,
+        data: count
+      });
+    },
+
     /**
      * 初始化用户信息
      * @param commit

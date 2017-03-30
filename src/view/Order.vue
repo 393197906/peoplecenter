@@ -4,60 +4,43 @@
     <div class="content">
       <Tabs :value="tab">
         <Tab-pane label="所有订单" name="all">
-          <GoodsTitle></GoodsTitle>
-          <GoodsCard></GoodsCard>
-          <GoodsCard></GoodsCard>
-          <GoodsCard></GoodsCard>
-          <GoodsCard></GoodsCard>
-          <GoodsCard></GoodsCard>
-          <div class="page-container">
-            <div>
-            <Page :total="100"></Page>
-            </div>
-          </div>
+          <OrderList></OrderList>
         </Tab-pane>
         <Tab-pane label="待付款" name="waitPay">
-          <GoodsTitle></GoodsTitle>
+          <OrderList :orderType="0"></OrderList>
         </Tab-pane>
         <Tab-pane label="待发货" name="waitSend">
-          <GoodsTitle></GoodsTitle>
+          <OrderList :orderType="1"></OrderList>
         </Tab-pane>
         <Tab-pane label="待收货" name="waitReceive">
-          <GoodsTitle></GoodsTitle>
+          <OrderList :orderType="2"></OrderList>
         </Tab-pane>
         <Tab-pane label="待评价" name="waitComment">
-          <GoodsTitle></GoodsTitle>
+          <OrderList :orderType="3"></OrderList>
         </Tab-pane>
         <Tab-pane label="退换货" name="returnGoods">
-          <GoodsTitle></GoodsTitle>
         </Tab-pane>
       </Tabs>
     </div>
   </div>
 </template>
 <style scoped>
-  .page-container{
-    margin-top: 20px;
-  }
-  .page-container div{
-    float: right;
-  }
   .content {
     padding: 20px;
+    position: relative;
   }
 </style>
 
 <script>
   import SubTitle from '@/components/SubTitle'
-  import GoodsTitle from '@/components/order/GoodsTitle'
-  import GoodsCard from '@/components/order/GoodsCard'
+  import OrderList from '@/components/order/OrderList'
   export default {
-    components: {SubTitle, GoodsTitle,GoodsCard},
-    props:{
-        tab:{
-          type: String,
-          default: 'all'
-        }
+    components: {SubTitle, OrderList},
+    props: {
+      tab: {
+        type: String,
+        default: 'all'
+      }
     }
   }
 

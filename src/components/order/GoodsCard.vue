@@ -2,65 +2,73 @@
   <div>
     <Row class="title">
       <Col span="6">
-      订单编号:1601430</Col>
+      订单编号:{{order.order_sn}}</Col>
       <Col span="18">
-      成交时间:2017-07-21</Col>
+      成交时间:{{order.add_time}}</Col>
     </Row>
     <Row class="border">
       <Col span="12">
-      <Row>
+      <Row v-for="(v,k) in order.goods" :key="k">
         <Col span="5">
-        <img class='img' src="http://tpl.amazeui.org/template/10/shop/one/images/kouhong.jpg_80x80.jpg" alt="image">
+        <img class='img' :src="v.goods_fristimage" alt="image">
         </Col>
         <Col span="11" class="content">
-        <p><strong>美康粉黛美唇膏 持久保湿滋润不掉色</strong></p>
-        <p class="line2">颜色:六宫粉黛无颜色</p>
-        <p class="line2">包装:裸装</p>
+        <p><strong>{{v.goods_name}}</strong></p>
+        <p class="line2">类型:{{v.goods_tag}}</p>
         </Col>
         <Col span="5">
-        333.00</Col>
+        {{v.goods_amount}}</Col>
         <Col span="3">
-        x3</Col>
-      </Row>
-      <Row>
-        <Col span="5">
-        <img class='img' src="http://tpl.amazeui.org/template/10/shop/one/images/kouhong.jpg_80x80.jpg" alt="image">
-        </Col>
-        <Col span="11" class="content">
-        <p><strong>美康粉黛美唇膏 持久保湿滋润不掉色</strong></p>
-        <p class="line2">颜色:六宫粉黛无颜色</p>
-        <p class="line2">包装:裸装</p>
-        </Col>
-        <Col span="5">
-        333.00</Col>
-        <Col span="3">
-        x3</Col>
-      </Row>
-      <Row>
-        <Col span="5">
-        <img class='img' src="http://tpl.amazeui.org/template/10/shop/one/images/kouhong.jpg_80x80.jpg" alt="image">
-        </Col>
-        <Col span="11" class="content">
-        <p><strong>美康粉黛美唇膏 持久保湿滋润不掉色</strong></p>
-        <p class="line2">颜色:六宫粉黛无颜色</p>
-        <p class="line2">包装:裸装</p>
-        </Col>
-        <Col span="5">
-        333.00</Col>
-        <Col span="3">
-        x3</Col>
+        x{{v.goods_num}}</Col>
       </Row>
       </Col>
       <Col span="6">
-      <strong>合计:676.00</strong> 含运费10.00</Col>
+      <strong>合计:{{order.order_amount}}</strong> <!--含运费10.00--></Col>
+      <!--订单状态判断-->
+      <div v-if="order.pay_status === 0 ">
       <Col span="3">
-      交易成功<br><br>订单详情<br><br>查看物流</Col>
+      等待买家付款<br><br><span>取消订单</span></Col>
       <Col span="3">
-      <Button type="error">删除订单</Button></Col>
+      <Button type="warning">立刻付款</Button></Col>
+      </div>
+
+      <div v-if="order.pay_status === 1 ">
+        <Col span="3">
+        买家已付款<br><br>未发货<br><br><span>订单详情</span></Col>
+        <Col span="3">
+        <Button type="error">提醒发货</Button></Col>
+      </div>
+
+      <div v-if="order.pay_status === 2 ">
+        <Col span="3">
+        商家已发货<br><br><span>查看物流</span><br><br><span>订单详情</span></Col>
+        <Col span="3">
+        <Button type="success">确认收货</Button></Col>
+      </div>
+
+      <div v-if="order.pay_status === 3 ">
+        <Col span="3">
+        已确认收货<br><br><span>查看物流</span><br><br><span>订单详情</span></Col>
+        <Col span="3">
+        <Button >评价商品</Button></Col>
+      </div>
+
+      <div v-if="order.pay_status === 4 ">
+        <Col span="3">
+        交易成功<br><br><span>查看物流</span></Col>
+        <Col span="3">
+        <Button type="dashed">删除订单</Button></Col>
+      </div>
     </Row>
   </div>
 </template>
-
+<script>
+  export default {
+      props:{
+          order:{}
+      }
+  }
+</script>
 <style scoped>
   .line2 {
     font-size: 12px;

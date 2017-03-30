@@ -24,14 +24,11 @@ router.afterEach((to, from, next) => {
   iView.LoadingBar.finish()
 });
 
-/* eslint-disable no-new */
-const app = new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: {App}
-});
+Vue.prototype.$const = {
+  phoneV: /^1[34578]\d{9}$/, //手机验证正则
+  emailV: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/, //邮箱验证规则,
+  pageSize:1
+};
 
 //错误处理
 Vue.prototype.doError = (err) => {
@@ -48,8 +45,16 @@ Vue.prototype.doSuccess = (info) => {
   });
 };
 
-Vue.prototype.$const = {
-  phoneV: /^1[34578]\d{9}$/, //手机验证正则
-  emailV: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/ //邮箱验证规则
-};
+
+/* eslint-disable no-new */
+const app = new Vue({
+  el: '#app',
+  router,
+  store,
+  template: '<App/>',
+  components: {App}
+});
+
+
+
 
