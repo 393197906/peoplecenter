@@ -46,11 +46,10 @@
 <script>
   import './safe.css'  //样式
   import service from '@/service/service'
-  const phoneV  = /^1[34578]\d{9}$/;
   export default{
     methods: {
       getVcode(){
-        if (!(phoneV.test(this.form.phone))) {
+        if (!(this.$const.phoneV.test(this.form.phone))) {
           this.doError("手机格式不正确");
           return;
         }
@@ -106,7 +105,7 @@
             {required: true, message: '手机号码不能为空', trigger: 'blur'},
             {
               validator: (rule, value, callback) => {
-                if (!(phoneV.test(value))) {
+                if (!(this.$const.phoneV.test(value))) {
                   callback(new Error('手机号码格式不正确!'));
                 } else {
                   callback();

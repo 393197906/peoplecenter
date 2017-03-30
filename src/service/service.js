@@ -46,7 +46,7 @@ export default  {
             shippingTime: "2013-08-08 23:01:01"
           },
         ])
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -72,7 +72,7 @@ export default  {
             goodsNum: 2
           },
         ])
-      }, 5000)
+      }, 1000)
     })
   },
 
@@ -98,7 +98,7 @@ export default  {
             goodsNum: 2
           },
         ])
-      }, 7000)
+      }, 1000)
     })
 
   },
@@ -146,7 +146,7 @@ export default  {
             content: "账号注册成功"
           }
         ])
-      }, 3000)
+      }, 1000)
     })
 
   },
@@ -185,7 +185,7 @@ export default  {
             goodsTitle: "我是一件好商品5"
           }
         ])
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -222,7 +222,7 @@ export default  {
             ]
           }
         )
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -263,7 +263,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -276,7 +276,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -290,7 +290,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -303,7 +303,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -317,7 +317,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -332,7 +332,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -345,7 +345,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -356,11 +356,10 @@ export default  {
    * @returns {Promise}
    */
   setEmail({email, vcode}){
-    console.log(email);
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -375,7 +374,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true)
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -393,8 +392,8 @@ export default  {
             contaceperson: "达文西收货",
             province: "山东",
             city: "菏泽",
-            districe: "成武",
-            mobile_phone: "1888888888",
+            districe: "成武县",
+            mobile_phone: "13583103635",
             address: "你好，你在哪呢",
             zipcode: "274200",
             is_default: 0
@@ -405,14 +404,14 @@ export default  {
             contaceperson: "达文西2",
             province: "山东",
             city: "菏泽",
-            districe: "成武",
-            mobile_phone: "1888888888",
+            districe: "曹县",
+            mobile_phone: "13771998358",
             address: "我是二号收货地址",
             zipcode: "274200",
             is_default: 1
           }
         ])
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -425,7 +424,7 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true);
-      }, 3000)
+      }, 1000)
     })
   },
 
@@ -438,16 +437,253 @@ export default  {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true);
-      }, 3000)
+      }, 1000)
     })
   },
 
+  /**
+   * 新增收货地址
+   * @param address
+   * @returns {Promise}
+   */
   addAddress(address){
-    console.log(address);
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(true);
-      }, 3000)
+      }, 1000)
+    })
+  },
+  /**
+   * 编辑收货地址
+   * @param address
+   * @returns {Promise}
+   */
+  editAddress(address){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(true);
+      }, 1000)
+    })
+  },
+
+  /**
+   * 获取订单
+   * @param psize
+   * @param pnum
+   * @param label
+   * @returns {Promise}
+   */
+  //0未付款1已付款2已发货3确认收货
+  getOrder({psize,pnum,label}){
+    if(label===''){
+
+    }
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        const data = [
+          {
+            ID: 1,
+            order_sn: "我是一个订单编号",
+            order_status: 0,
+            shipping_num: '',
+            pay_status: 0,
+            order_amount: 123.50,
+            add_time: '2017-07-21 10:23:22',
+            send_time: '2017-07-21 10:23:22',
+            pay_time: '2017-07-21 10:23:22',
+            complete_time: '2017-07-21 10:23:22',
+            goods: [
+              {
+                goods_id: 1,
+                goods_num: 25,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              },
+              {
+                goods_id: 2,
+                goods_num: 3,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              }
+            ]
+          },
+          {
+            ID: 2,
+            order_sn: "我是一个订单编号",
+            order_status: 0,
+            shipping_num: '',
+            pay_status: 1,
+            order_amount: 123.50,
+            add_time: '2017-07-21 10:23:22',
+            send_time: '2017-07-21 10:23:22',
+            pay_time: '2017-07-21 10:23:22',
+            complete_time: '2017-07-21 10:23:22',
+            goods: [
+              {
+                goods_id: 1,
+                goods_num: 25,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              },
+              {
+                goods_id: 2,
+                goods_num: 3,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              }
+            ]
+          },
+          {
+            ID: 3,
+            order_sn: "我是一个订单编号",
+            order_status: 0,
+            shipping_num: '',
+            pay_status: 2,
+            order_amount: 123.50,
+            add_time: '2017-07-21 10:23:22',
+            send_time: '2017-07-21 10:23:22',
+            pay_time: '2017-07-21 10:23:22',
+            complete_time: '2017-07-21 10:23:22',
+            goods: [
+              {
+                goods_id: 1,
+                goods_num: 25,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              },
+              {
+                goods_id: 2,
+                goods_num: 3,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              }
+            ]
+          },
+          {
+            ID: 4,
+            order_sn: "我是一个待评价订单",
+            order_status: 3,
+            shipping_num: '',
+            pay_status: 3,
+            order_amount: 123.50,
+            add_time: '2017-07-21 10:23:22',
+            send_time: '2017-07-21 10:23:22',
+            pay_time: '2017-07-21 10:23:22',
+            complete_time: '2017-07-21 10:23:22',
+            goods: [
+              {
+                goods_id: 1,
+                goods_num: 25,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              },
+              {
+                goods_id: 2,
+                goods_num: 3,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              }
+            ]
+          },
+          {
+            ID: 5,
+            order_sn: "我是一个交易成功的订单",
+            order_status: 4,
+            shipping_num: '',
+            pay_status: 4,
+            order_amount: 123.50,
+            add_time: '2017-07-21 10:23:22',
+            send_time: '2017-07-21 10:23:22',
+            pay_time: '2017-07-21 10:23:22',
+            complete_time: '2017-07-21 10:23:22',
+            goods: [
+              {
+                goods_id: 1,
+                goods_num: 25,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              },
+              {
+                goods_id: 2,
+                goods_num: 3,
+                goods_name: '联想测试',
+                goods_fristimage: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+                goods_tag: '新品',
+                goods_amount: 123.54,
+                goods_money: 123.54,
+                pay_amout: 1000
+              }
+            ]
+          },
+        ]
+        const ndata = [];
+        ndata.push(data[pnum]);
+        res(data);
+      }, 1000)
+    })
+  },
+
+  /**
+   * 获取订单总数
+   * @param label
+   * @returns {Promise}
+   */
+  getOrderCount({label}){
+    if(label===''){
+    }
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+       res(5);
+      }, 1000)
+    })
+  },
+
+  /**
+   * 删除订单
+   * @param ID
+   * @returns {Promise}
+   */
+  deleteOrder(ID){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(5);
+      }, 1000)
     })
   }
 

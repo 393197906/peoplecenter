@@ -39,7 +39,6 @@
   import threeData from '@/assets/json/address.json'; //全国数据
   import service from '@/service/service'
 
-  const phoneV = /^1[34578]\d{9}$/; //手机验证正则
   export default {
     components: {SubTitle, MyAddress},
     created(){
@@ -76,7 +75,7 @@
             {required: true, message: '联系方式不能为空', trigger: 'blur'},
             {
               validator: (rule, value, callback) => {
-                if (!(phoneV.test(value))) {
+                if (!(this.$const.phoneV.test(value))) {
                   callback(new Error('手机号码格式不正确!'));
                 } else {
                   callback();

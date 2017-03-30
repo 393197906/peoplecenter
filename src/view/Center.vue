@@ -9,6 +9,7 @@
         <p slot="title">我的订单</p>
         <Row>
           <Col span="5" class="icon-container">
+          <div class="badge">10</div>
           <div @click="viewModal('waitPay')">
             <p>
               <Icon type="ios-refresh-empty"></Icon>
@@ -17,6 +18,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
+          <div class="badge">7</div>
           <div @click="viewModal('waitSend')">
             <p>
               <Icon type="ios-upload-outline"></Icon>
@@ -25,6 +27,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
+          <div class="badge">2</div>
           <div @click="viewModal('waitReceive')">
             <p>
               <Icon type="ios-download-outline"></Icon>
@@ -33,6 +36,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
+          <div class="badge">1</div>
           <div @click="viewModal('waitComment')">
             <p>
               <Icon type="compose"></Icon>
@@ -41,6 +45,7 @@
           </div>
           </Col>
           <Col span="4" class="icon-container">
+          <div class="badge" style="right:20px;">10</div>
           <div @click="viewModal('returnGoods')">
             <p>
               <Icon type="heart-broken"></Icon>
@@ -255,6 +260,19 @@
 
   .icon-container {
     text-align: center;
+  }
+  .badge{
+    position: absolute;
+    right:38px;
+    top:0;
+    background-color: #FF6262;
+    color:#fff;
+    width:18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
   }
 
   .icon-container:hover {
