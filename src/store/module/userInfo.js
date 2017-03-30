@@ -52,7 +52,22 @@ export default {
           break;
         }
       }
+    },
+    /**
+     * 删除一个订单
+     * @param state
+     * @param ID
+     */
+      [type.REMOVE_ONE_ORDER](state, {ID}){
+      for (let i = 0; i < state.order.length; i++) {
+        if (state.order[i].ID === ID) {
+          state.order.splice(i, 1);
+          break;
+        }
+      }
+      state.orderCount--;
     }
+
   },
   actions: {
 

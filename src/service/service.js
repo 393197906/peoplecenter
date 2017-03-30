@@ -672,6 +672,19 @@ export default  {
        res(5);
       }, 1000)
     })
+  },
+
+  /**
+   * 删除订单
+   * @param ID
+   * @returns {Promise}
+   */
+  deleteOrder(ID){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(5);
+      }, 1000)
+    })
   }
 
 }
