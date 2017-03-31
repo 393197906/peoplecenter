@@ -1,5 +1,5 @@
 <template>
-  <div class="animated fadeIn">
+  <div class="animated ">
     <Row class="title">
       <Col span="6">
       订单编号:{{order.order_sn}}</Col>
@@ -272,7 +272,7 @@
   .border {
     border: 1px solid #d7dde4;
     border-top: 2px solid #d7dde4;
-    padding: 15px;
+    padding: 20px 15px;
   }
 
   .comment {

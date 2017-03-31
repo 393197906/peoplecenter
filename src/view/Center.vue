@@ -9,7 +9,7 @@
         <p slot="title">我的订单</p>
         <Row>
           <Col span="5" class="icon-container">
-          <div class="badge">10</div>
+          <div class="badge">{{count0}}</div>
           <div @click="viewModal('waitPay')">
             <p>
               <Icon type="ios-refresh-empty"></Icon>
@@ -18,7 +18,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
-          <div class="badge">7</div>
+          <div class="badge">{{count1}}</div>
           <div @click="viewModal('waitSend')">
             <p>
               <Icon type="ios-upload-outline"></Icon>
@@ -27,7 +27,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
-          <div class="badge">2</div>
+          <div class="badge">{{count2}}</div>
           <div @click="viewModal('waitReceive')">
             <p>
               <Icon type="ios-download-outline"></Icon>
@@ -36,7 +36,7 @@
           </div>
           </Col>
           <Col span="5" class="icon-container">
-          <div class="badge">1</div>
+          <div class="badge">{{count3}}</div>
           <div @click="viewModal('waitComment')">
             <p>
               <Icon type="compose"></Icon>
@@ -45,7 +45,7 @@
           </div>
           </Col>
           <Col span="4" class="icon-container">
-          <div class="badge" style="right:20px;">10</div>
+          <!--<div class="badge" style="right:20px;">10</div>-->
           <div @click="viewModal('returnGoods')">
             <p>
               <Icon type="heart-broken"></Icon>
@@ -174,6 +174,19 @@
       },
       goods(){
         return this.$store.state.goods;
+      },
+//      统计数据
+      count0(){
+        return this.$store.state.userInfo.orderCount0 || '';
+      },
+      count1(){
+        return this.$store.state.userInfo.orderCount1 || '';
+      },
+      count2(){
+        return this.$store.state.userInfo.orderCount2 || '';
+      },
+      count3(){
+        return this.$store.state.userInfo.orderCount3 || '';
       }
     },
     data(){
@@ -261,13 +274,14 @@
   .icon-container {
     text-align: center;
   }
-  .badge{
+
+  .badge {
     position: absolute;
-    right:38px;
-    top:0;
+    right: 38px;
+    top: 0;
     background-color: #FF6262;
-    color:#fff;
-    width:18px;
+    color: #fff;
+    width: 18px;
     height: 18px;
     line-height: 18px;
     text-align: center;
