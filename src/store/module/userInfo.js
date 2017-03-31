@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/26.
  */
 import service from '@/service/service'
-import * as type from "@/store/mtype"
+import type from "@/store/mtype"
 
 export default {
   state: {
@@ -27,8 +27,8 @@ export default {
     order3: null,          //用户待评价订单
     orderCount3: null,      //用户待评价订单总数
 
-    order4: null,          //用户退换货订单
-    orderCount4: null,      //用户退换货订单总数
+    order4: null,          //用户交易成功订单
+    orderCount4: null,      //用户交易成功订单总数
   },
   mutations: {
     /**
@@ -53,8 +53,53 @@ export default {
         }
       }
     },
+
     /**
-     * 删除一个订单
+     * 确认收货订单
+     * @param state
+     * @param ID
+     */
+      [type.CONFIRM_RECEIVE_ONE_ORDER](state, {ID}){
+      let index = null;
+      for (let i = 0; i < state.order2.length; i++) {
+        if (state.order2[i].ID === ID) {
+          state.order2[i].pay_status = 3;            //改变订单状态
+          state.order2[i].order_status = 3;            //改变订单状态
+          index = state.order2.splice(i, 1)[0]
+          state.order3.unshift(index); // 3删除订单  4添加订单
+          state.orderCount2--;
+          state.orderCount3++;
+          break;
+        }
+      }
+      for (let j = 0; j < state.order.length; j++) {
+        if (state.order[j].ID === index.ID) {
+          state.order[j].pay_status = 3;            //改变订单状态
+          state.order[j].order_status = 3;
+        }
+      }
+    },
+
+    /**
+     * 评价订单
+     * @param state
+     * @param ID
+     */
+      [type.COMMENT_ONE_ORDER](state, {ID}){
+      for (let i = 0; i < state.order3.length; i++) {
+        if (state.order3[i].ID === ID) {
+          state.order3[i].pay_status = 4;            //改变订单状态
+          state.order3[i].order_status = 4;            //改变订单状态
+          state.order.unshift(state.order3.splice(i, 1)[0]); // 3删除订单  (4,all)添加订单
+          state.orderCount3--;
+          state.orderCount++;
+          break;
+        }
+      }
+    },
+
+    /**
+     * 删除订单
      * @param state
      * @param ID
      */
@@ -62,15 +107,36 @@ export default {
       for (let i = 0; i < state.order.length; i++) {
         if (state.order[i].ID === ID) {
           state.order.splice(i, 1);
+          state.orderCount--;
           break;
         }
       }
-      state.orderCount--;
-    }
+    },
+
+    /**
+     * 取消订单
+     * @param state
+     * @param ID
+     */
+    [type.CANCLE_ONE_ORDER](state, {ID}){
+      let index = null;
+      for (let i = 0; i < state.order0.length; i++) {
+        if (state.order0[i].ID === ID) {
+          index = state.order0.splice(i, 1)[0];
+          state.orderCount0--;
+          break;
+        }
+      }
+      for (let j = 0; j < state.order.length; j++) {
+        if (state.order[j].ID === index.ID) {
+          state.order.splice(j, 1);
+          state.orderCount--;
+        }
+      }
+    },
 
   },
   actions: {
-
     /**
      * 初始化订单数据
      * @param commit
@@ -93,6 +159,31 @@ export default {
         index: `orderCount${label}`,
         data: count
       });
+    },
+
+    /**
+     * 评价订单
+     * @param commit
+     * @param ID
+     * @param desc
+     * @param star
+     * @param tag
+     * @returns {Promise.<void>}
+     */
+    async commentOrder({commit}, {ID, desc, star, tag}){
+      await service.commentOrder({ID, desc, star, tag});
+      commit(type.COMMENT_ONE_ORDER, {ID});
+    },
+
+    /**
+     * 确认收货
+     * @param commit
+     * @param ID
+     * @returns {Promise.<void>}
+     */
+    async confirmReceiveOrder({commit}, {ID}){
+      await service.confirmReceiveOrder(ID);
+      commit(type.CONFIRM_RECEIVE_ONE_ORDER, {ID});
     },
 
     /**

@@ -1,11 +1,22 @@
 <template>
-  <div class="container">
-    <div class="img-container">
-      <img :src="goodsImg" alt="gooods">
+  <div class="container"  @mouseover="hover=true" @mouseleave="hover=false">
+    <div class="img-container" :style="{height:`${height}px`}">
+      <img :src="goodsImg" alt="goods">
     </div>
     <div class="content">
       <p>¥{{goodsPrice}} <span style="color:#fb9f33"> * {{goodsNum}}</span></p>
       <p>{{goodsTitle}}</p>
+      <row class="action" :class="{adiplay:hover}">
+        <Col span="11">
+        <Button type="error" size="small" long>购物车</Button>
+        </Col>
+        <Col span="2">
+        &nbsp;
+        </Col>
+        <Col span="11">
+        <Button type="primary" size="small" long>移出收藏</Button>
+        </Col>
+      </row>
     </div>
   </div>
 </template>
@@ -26,8 +37,21 @@
       }
       , goodsNum: {
         type: Number
+      },
+      height: {
+        type: Number,
+        default: 150
+      }
+    },
+    methods:{
+
+    },
+    data(){
+      return {
+          hover:false
       }
     }
+
   }
 </script>
 <style scoped>
@@ -41,7 +65,7 @@
   }
 
   .img-container {
-    height: 150px;
+    height: 160px;
   }
 
   .img-container img {
@@ -54,6 +78,10 @@
     font-size: 12px;
   }
 
+  .content > * {
+    margin-top: 10px;
+  }
+
   .content p:first-child {
     color: #f40;
   }
@@ -61,6 +89,14 @@
   .content p:last-child {
     margin-top: 3px;
     line-height: 18px;
+  }
+
+  .action {
+    text-align: center;
+    display: none;
+  }
+  .adiplay{
+    display:block ;
   }
 
 

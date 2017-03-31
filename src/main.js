@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import '@/assets/css/app.less'   // 自定义样式
+import 'animate.css'
 import iView from 'iview'
 import VueResource from 'vue-resource';
 
