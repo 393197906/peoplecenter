@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/26.
  */
 import service from '@/service/service'
-import * as type from "@/store/mtype"
+import  type from "@/store/mtype"
 
 export default {
   state: {

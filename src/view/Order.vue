@@ -18,8 +18,8 @@
         <Tab-pane label="待评价" name="waitComment">
           <OrderList :orderType="3"></OrderList>
         </Tab-pane>
-        <Tab-pane label="退换货" name="returnGoods">
-        </Tab-pane>
+        <!--<Tab-pane label="退换货" name="returnGoods">-->
+        <!--</Tab-pane>-->
       </Tabs>
     </div>
   </div>

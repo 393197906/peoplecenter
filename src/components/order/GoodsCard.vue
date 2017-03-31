@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <Row class="title">
       <Col span="6">
       订单编号:{{order.order_sn}}</Col>
@@ -27,7 +27,7 @@
       <!--订单状态判断-->
       <div v-if="order.pay_status === 0 ">
         <Col span="3">
-        等待买家付款<br><br><span>取消订单</span></Col>
+        等待买家付款<br><br><span class="label" @click="cancleOrder">取消订单</span></Col>
         <Col span="3">
         <Button type="warning">立刻付款</Button>
         </Col>
@@ -35,23 +35,23 @@
 
       <div v-if="order.pay_status === 1 ">
         <Col span="3">
-        买家已付款<br><br>未发货<br><br><span>订单详情</span></Col>
+        买家已付款<br><br>未发货<br><br><span class="label">订单详情</span></Col>
         <Col span="3">
-        <Button type="error">提醒发货</Button>
+        <Button type="error" @click="callSend">提醒发货</Button>
         </Col>
       </div>
 
       <div v-if="order.pay_status === 2 ">
         <Col span="3">
-        商家已发货<br><br><span>查看物流</span><br><br><span>订单详情</span></Col>
+        商家已发货<br><br><span class="label" @click='openShipping'>{{this.shipping.display?'隐藏物流':'查看物流'}}</span><br><br><span class="label">订单详情</span></Col>
         <Col span="3">
-        <Button type="success">确认收货</Button>
+        <Button type="success" @click="confirmReceive">确认收货</Button>
         </Col>
       </div>
 
       <div v-if="order.pay_status === 3 ">
         <Col span="3">
-        已确认收货<br><br><span>查看物流</span><br><br><span>订单详情</span></Col>
+        已确认收货<br><br><span class="label" @click='openShipping'>{{this.shipping.display?'隐藏物流':'查看物流'}}</span><br><br><span class="label">订单详情</span></Col>
         <Col span="3">
         <Button @click="commentOrder">评价商品</Button>
         </Col>
@@ -59,12 +59,47 @@
 
       <div v-if="order.pay_status === 4 ">
         <Col span="3">
-        交易成功<br><br><span>查看物流</span></Col>
+        交易成功<br><br><span class="label" @click='openShipping'>{{this.shipping.display?'隐藏物流':'查看物流'}}</span></Col>
         <Col span="3">
         <Button type="dashed" @click="deleteOrder">删除订单</Button>
         </Col>
       </div>
     </Row>
+    <!--评价商品-->
+    <div class="comment animated slideInLeft" style="margin-top: 10px;"
+         v-if="order.pay_status === 3 && comment.display">
+      <Form ref="formValidate" :model="comment" :rules="comment.rule" :label-width="60">
+        <Form-item label="评分" prop="star">
+          <Rate :show-text="true" v-model="comment.star"></Rate>
+        </Form-item>
+        <Form-item label="标签" prop="tag">
+          <Checkbox-group v-model="comment.tag">
+            <Checkbox label="物流速度快"></Checkbox>
+            <Checkbox label="服务好"></Checkbox>
+            <Checkbox label="适合我"></Checkbox>
+            <Checkbox label="包装好"></Checkbox>
+            <Checkbox label="是正品"></Checkbox>
+          </Checkbox-group>
+        </Form-item>
+        <Form-item label="评价" prop="desc">
+          <Input v-model="comment.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入评语"></Input>
+        </Form-item>
+        <Form-item style="margin:0">
+          <Button type="primary" @click="commentSubmit('formValidate')">提交</Button>
+          <Button type="ghost" @click="comment.display = false" style="margin-left: 8px;">取消</Button>
+        </Form-item>
+      </Form>
+    </div>
+    <div class="shipping animated fadeIn" style="margin-top: 10px;"
+         v-if="(order.pay_status === 2 || order.pay_status === 3 || order.pay_status === 4) && shipping.display">
+      <Spin fix size="large" v-if="shipping.loading"></Spin>
+      <Timeline v-if="!shipping.loading">
+        <Timeline-item v-for="v in shipping.data" :key="v.id">
+          <p class="time">{{v.time}}</p>
+          <p class="content">{{v.content}}</p>
+        </Timeline-item>
+      </Timeline>
+    </div>
   </div>
 </template>
 <script>
@@ -76,17 +111,48 @@
     },
     methods: {
       /**
+       * 提醒发货
+       */
+      callSend(){
+        this.$Modal.confirm({
+          title: '提醒发货',
+          content: '商家已经努力在为您发货了，确定要提醒吗？',
+          loading: true,
+          onOk: () => {
+            setTimeout(() => {
+              this.$Modal.remove();
+              this.doSuccess("提醒发货成功");
+            }, 1000)
+          }
+        });
+      },
+      /**
+       *确认收货
+       */
+      confirmReceive(){
+        this.$Modal.confirm({
+          title: '确认收货',
+          content: '确定收到货了吗？',
+          loading: true,
+          onOk: () => {
+            this.$store.dispatch('confirmReceiveOrder', {ID: this.order.ID}).then(() => {
+              this.$Modal.remove();
+              this.doSuccess("确认收货成功");
+            }).catch(this.doError);
+          }
+        });
+      },
+      /**
        * 删除订单
        */
       deleteOrder(){
-        console.log(this.order.ID);
         this.$Modal.confirm({
           title: '确认删除',
           content: '确定要删除此订单吗？',
           loading: true,
           onOk: () => {
             service.deleteOrder(this.order.ID).then(() => {
-              this.$store.commit("REMOVE_ONE_ORDER", {ID: this.order.ID}); //state 移除订单
+              this.$store.commit('REMOVE_ONE_ORDER', {ID: this.order.ID}); //state 移除订单
               this.$Modal.remove();
               this.doSuccess("订单删除成功");
             }).catch(this.doError);
@@ -94,18 +160,91 @@
         });
       },
       /**
-       * 评价订单
+       * 取消订单
+       */
+      cancleOrder(){
+        this.$Modal.confirm({
+          title: '确认取消订单',
+          content: '确定要取消此订单吗？',
+          loading: true,
+          onOk: () => {
+            service.deleteOrder(this.order.ID).then(() => {
+              this.$store.commit('CANCLE_ONE_ORDER', {ID: this.order.ID}); //state 移除订单
+              this.$Modal.remove();
+              this.doSuccess("订单取消成功");
+            }).catch(this.doError);
+          }
+        });
+      },
+      /**
+       * 评价订单显示切换
        */
       commentOrder(){
-        this.comment.display = true;
+        this.comment.display = !this.comment.display;
+      },
+      /**
+       * 评价订单提交
+       * @param name
+       */
+      commentSubmit(name){
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$store.dispatch('commentOrder', {
+              ID: this.order.ID,
+              desc: this.comment.desc,
+              tag: this.comment.tag,
+              star: this.comment.star
+            }).then(() => {
+              this.doSuccess('订单评价成功');
+            }).catch(this.doError);
+          } else {
+            this.$Message.error('评论表单验证失败!');
+          }
+        })
+      },
+      /**
+       * 查看物流
+       */
+      openShipping(){
+        this.shipping.display = !this.shipping.display;
+        if (this.$store.state.goods.shippingDetailMap.has(this.order.shipping_num)) {
+          this.shipping.data = this.$store.state.goods.shippingDetailMap.get(this.order.shipping_num);
+          this.shipping.loading = false;
+        } else {
+          this.$store.dispatch('initShippingDetail', {shippingId:this.order.shipping_num}).then(() => { //TODO
+            this.shipping.loading = false;
+            this.shipping.data = this.$store.state.goods.shippingDetailMap.get(this.order.shipping_num);
+          }).catch(this.doError)
+        }
       }
     },
     data(){
       return {
-        bc: ['bc0', 'bc1', 'bc2', 'bc3', 'bc4'],
         comment: {
-          display: false
-        }
+          display: false,
+          star: 5,
+          tag: [],
+          desc: '',
+          rule: {
+            star: [
+              {required: true, message: '请评分'},
+            ],
+            tag: [
+              {required: true, type: 'array', min: 1, message: '至少选择一个标签', trigger: 'change'},
+            ],
+            desc: [
+              {required: true, message: '请输入评语', trigger: 'blur'},
+              {type: 'string', min: 10, message: '评价不能少于10字', trigger: 'blur'},
+              {max: 50, message: '介绍不能多于50字', trigger: 'blur'}
+            ]
+          }
+        },
+        shipping: {
+          display: false,
+          loading: true,
+          data: []  //物流数据
+        },
+        bc: ['bc0', 'bc1', 'bc2', 'bc3', 'bc4'],
       }
     }
   }
@@ -134,6 +273,26 @@
     border: 1px solid #d7dde4;
     border-top: 2px solid #d7dde4;
     padding: 15px;
+  }
+
+  .comment {
+    border: 1px solid rgba(255, 153, 0, 0.5);
+    padding: 15px;
+    border-radius: 30px;
+  }
+
+  .shipping {
+    padding: 15px;
+    position: relative;
+  }
+
+  .label {
+    cursor: pointer;
+  }
+
+  .label:hover {
+    text-decoration: underline;
+    color: rgba(255, 153, 0, 1);
   }
 
   .title {

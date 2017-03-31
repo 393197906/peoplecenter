@@ -93,12 +93,7 @@
         } else {
           this.$store.dispatch('initShippingDetail', {shippingId}).then(() => {
             this.modalShipping.load = false;
-          }).catch((err) => {
-            this.$Notice.error({
-              title: '错误',
-              desc: err
-            });
-          })
+          }).catch(this.doError)
         }
       }
     }

@@ -485,7 +485,7 @@ export default  {
             ID: 1,
             order_sn: "我是一个订单编号",
             order_status: 0,
-            shipping_num: '',
+            shipping_num: 0,
             pay_status: 0,
             order_amount: 123.50,
             add_time: '2017-07-21 10:23:22',
@@ -519,7 +519,7 @@ export default  {
             ID: 2,
             order_sn: "我是一个订单编号",
             order_status: 0,
-            shipping_num: '',
+            shipping_num: 0,
             pay_status: 1,
             order_amount: 123.50,
             add_time: '2017-07-21 10:23:22',
@@ -553,7 +553,7 @@ export default  {
             ID: 3,
             order_sn: "我是一个订单编号",
             order_status: 0,
-            shipping_num: '',
+            shipping_num: 1,
             pay_status: 2,
             order_amount: 123.50,
             add_time: '2017-07-21 10:23:22',
@@ -587,7 +587,7 @@ export default  {
             ID: 4,
             order_sn: "我是一个待评价订单",
             order_status: 3,
-            shipping_num: '',
+            shipping_num: 2,
             pay_status: 3,
             order_amount: 123.50,
             add_time: '2017-07-21 10:23:22',
@@ -621,7 +621,7 @@ export default  {
             ID: 5,
             order_sn: "我是一个交易成功的订单",
             order_status: 4,
-            shipping_num: '',
+            shipping_num: 1,
             pay_status: 4,
             order_amount: 123.50,
             add_time: '2017-07-21 10:23:22',
@@ -685,6 +685,36 @@ export default  {
         res(5);
       }, 1000)
     })
-  }
+  },
+
+  /**
+   * 评价订单
+   * @param ID
+   * @param desc
+   * @param star
+   * @param tag
+   * @returns {Promise}
+   */
+  commentOrder({ID,desc,star,tag}){
+    console.log({ID,desc,star,tag});
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(5);
+      }, 1000)
+    })
+  },
+
+  /**
+   * 确认收货
+   * @param ID
+   * @returns {Promise}
+   */
+  confirmReceiveOrder(ID){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(5);
+      }, 1000)
+    })
+  },
 
 }
