@@ -6,8 +6,8 @@
     </Col>
     <Col span="16" class="hehe" v-if="!toggle">
     <p>用户名:{{userInfo.title1}}</p>
-    <p>铜牌会员{{userInfo.title2}}</p>
-    <p>账户安全:60分{{userInfo.title3}}</p>
+    <!--<p>铜牌会员{{userInfo.title2}}</p>-->
+    <!--<p>账户安全:60分{{userInfo.title3}}</p>-->
     </Col>
   </Row>
 </template>

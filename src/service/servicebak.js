@@ -1,6 +1,3 @@
-import * as $http from 'axios';
-const url = "http://localhost/yinuonuo/index.php/Home/PersonalApi/";
-const userId = 62;
 export default  {
   /**
    * 获取用户信息
@@ -8,23 +5,22 @@ export default  {
    */
   getUserinfo(){
     return new Promise((res, rej) => {
-      $http.get(`${url}getUserinfo`, {params: {userId}}).then((rep) => {
-        rep.data.title1 = rep.data.user_name;
-        rep.data.title2 = rep.data.user_name;
-        rep.data.title3 = rep.data.user_name;
-        rep.data.img = rep.data.no_front_image;
-        rep.data.aname = rep.data.user_name;
-        rep.data.name = rep.data.user_xm;
-        rep.data.birthday = new Date(rep.data.user_csny);
-        rep.data.gender = rep.data.user_sex === '男' ? 'male' : rep.data.user_sex === '女' ? 'female' : 'no';
-        rep.data.desc = rep.data.user_name;
-        rep.data.phone = rep.data.user_phone;
-        rep.data.email = '';
-        rep.data.payPassword = '';
-        res(rep.data);
-      }).catch((error) => {
-        rej(error);
-      });
+      setTimeout(() => {
+        res({
+          title1: "谢利朋",
+          title2: "vuex",
+          title3: "hello vue",
+          img: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+          aname: "远在远方的风",
+          name: "谢利朋",
+          birthday: new Date("2017-07-21"),
+          gender: "male",
+          desc: "我是远在远方的风，你他妈的是谁",
+          phone: "",
+          email: "",
+          payPassword: ""
+        });
+      }, 1000)
     })
   },
 
@@ -32,7 +28,6 @@ export default  {
    * 获取用户商品物流信息
    * @returns {Promise}
    */
-  //TODO
   getShipping(){
     return new Promise((res, rej) => {
       setTimeout(() => {
@@ -61,18 +56,23 @@ export default  {
    */
   getShopcar(){
     return new Promise((res, rej) => {
-      $http.get(`${url}getShopcar`, {params: {userId}}).then(({data}) => {
-        for (let i = 0; i < data.length; i++) {
-          data[i].goodsId = parseInt(data[i].goods_id);
-          data[i].goodsImg = data[i].goods_fristimage;
-          data[i].goodTitle = data[i].goods_name;
-          data[i].goodsPrice = parseFloat(data[i].goods_money);
-          data[i].goodsNum = parseInt(data[i].goods_num);
-        }
-        res(data);
-      }).catch((error) => {
-        rej(error)
-      })
+      setTimeout(() => {
+        res([{
+          goodsId: 1,
+          goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+          goodsTitle: "下蛋公鸡，公鸡中的战斗机",
+          goodsPrice: 182.52,
+          goodsNum: 25
+        },
+          {
+            goodsId: 2,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "风的追求",
+            goodsPrice: 1182.52,
+            goodsNum: 2
+          },
+        ])
+      }, 1000)
     })
   },
 
@@ -80,7 +80,6 @@ export default  {
    * 获取用户收藏夹信息
    * @returns {Promise}
    */
-  //TODO
   getCollection({pnum, psize}){
     return new Promise((res, rej) => {
       setTimeout(() => {
@@ -108,7 +107,6 @@ export default  {
    * 获取收藏夹总数
    * @returns {Promise}
    */
-  //TODO
   getCollectionCount(){
     return new Promise((res, rej) => {
       setTimeout(() => {
@@ -121,7 +119,6 @@ export default  {
    * 获取用户成长信息
    * @returns {Promise}
    */
-  //TODO
   getGrowUp(){
     return new Promise((res, rej) => {
       setTimeout(() => {
@@ -172,16 +169,35 @@ export default  {
    */
   getHotGoods(){
     return new Promise((res, rej) => {
-      $http.get(`${url}getHotGoods`, {params: {userId}}).then(({data}) => {
-        for (let i = 0; i < data.length; i++) {
-          data[i].goodsId = parseInt(data[i].goods_id);
-          data[i].goodsImg = data[i].goods_fristimage;
-          data[i].goodTitle = data[i].goods_name;
-        }
-        res(data);
-      }).catch((error) => {
-        rej(error)
-      })
+      setTimeout(() => {
+        res([
+          {
+            goodsId: 1,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "我是一件好商品"
+          },
+          {
+            goodsId: 2,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "我是一件好商品2"
+          },
+          {
+            goodsId: 3,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "我是一件好商3"
+          },
+          {
+            goodsId: 4,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "我是一件好商品4"
+          },
+          {
+            goodsId: 5,
+            goodsImg: "http://tpl.amazeui.org/template/10/shop/one/images/getAvatar.do.jpg",
+            goodsTitle: "我是一件好商品5"
+          }
+        ])
+      }, 1000)
     })
   },
 
@@ -189,7 +205,6 @@ export default  {
    * 获取单个商品物流信息
    * @returns {Promise}
    */
-  //TODO
   findShipping(shippingId){
     return new Promise((res, rej) => {
       setTimeout(() => {

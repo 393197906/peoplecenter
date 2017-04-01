@@ -23,12 +23,11 @@
     }
   }
 </script>
-
-<style>
+<style scoped>
   .right {
     float: right;
     width: 84%;
-    background-color: rgb(245, 248, 250);
+    /*background-color: rgb(245, 248, 250);*/
     border-radius: 2px;
     position: relative;
   }

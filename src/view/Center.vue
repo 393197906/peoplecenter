@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="top">
+    <div class="top-vue">
       <SubTitle word1="个人中心" word2="Personal Center"></SubTitle>
     </div>
     <div class='left'>
@@ -259,7 +259,7 @@
     visibility: hidden;
   }
 
-  .top {
+  .top-vue {
     margin-bottom: 10px;
   }
 

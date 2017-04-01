@@ -120,7 +120,7 @@
   }
 
   .nav-container {
-    background-color: rgb(245, 248, 250);
+    /*background-color: rgb(245, 248, 250);*/
     width: 15%;
     float: left;
     border-top: 5px solid #FEC4D7;

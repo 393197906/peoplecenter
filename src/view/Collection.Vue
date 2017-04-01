@@ -33,7 +33,6 @@
     },
     methods: {
       page(pnum){
-        console.log(pnum);
         this.loading = true;
         this.$store.dispatch('initCollection',{pnum,psize:this.$const.pageSize}).then(() => {
           this.loading = false;
