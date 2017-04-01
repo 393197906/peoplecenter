@@ -75,12 +75,12 @@
         <Spin size="large" fix v-if="load.shopcar"></Spin> <!-- 加载动画-->
         <Row v-if="!load.shopcar">
           <Col span="6" class="coll-container" v-for="v in userInfo.shopcar" :key='v.goodsId'>
-          <CollCard
+          <ShopcarCard
             :goodsId="v.goodsId"
             :goodsImg="v.goodsImg"
             :goodsTitle="v.goodsTitle"
             :goodsPrice="v.goodsPrice"
-            :goodsNum="v.goodsNum"></CollCard>
+            :goodsNum="v.goodsNum"></ShopcarCard>
           </Col>
         </Row>
       </Card>
@@ -143,10 +143,11 @@
 <script>
   import ShippingCard from '@/components/order/ShippingCard'
   import CollCard from '@/components/order/CollCard'
+  import ShopcarCard from '@/components/order/ShopcarCard'
   import UserInfo from '@/components/UserInfo'
   import SubTitle from '@/components/SubTitle'
   export default {
-    components: {ShippingCard, UserInfo, SubTitle, CollCard},
+    components: {ShopcarCard,ShippingCard, UserInfo, SubTitle, CollCard},
     created(){
       const label = ['Shipping', 'Shopcar', 'Collection', 'Growup'];
       for (let index of label) {
@@ -154,9 +155,15 @@
         if (this.$store.state.userInfo[lab]) {
           this.load[lab] = false;
         } else {
-          this.$store.dispatch(`init${index}`).then(() => {
-            this.load[lab] = false;
-          }).catch(this.doError);
+          if (index === 'Collection') { // 分页
+            this.$store.dispatch(`init${index}`, {pnum: 1, psize: this.$const.pageSize}).then(() => {
+              this.load[lab] = false;
+            }).catch(this.doError);
+          } else {
+            this.$store.dispatch(`init${index}`).then(() => {
+              this.load[lab] = false;
+            }).catch(this.doError);
+          }
         }
       }
       //热卖商品

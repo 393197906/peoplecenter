@@ -1,5 +1,5 @@
 <template>
-  <div class="container"  @mouseover="hover=true" @mouseleave="hover=false">
+  <div class="container" @mouseover="hover=true" @mouseleave="hover=false">
     <div class="img-container" :style="{height:`${height}px`}">
       <img :src="goodsImg" alt="goods">
     </div>
@@ -8,13 +8,13 @@
       <p>{{goodsTitle}}</p>
       <row class="action" :class="{adiplay:hover}">
         <Col span="11">
-        <Button type="error" size="small" long>购物车</Button>
+        <Button type="error" size="small" long @click="addShopcar">购物车</Button>
         </Col>
         <Col span="2">
         &nbsp;
         </Col>
         <Col span="11">
-        <Button type="primary" size="small" long>移出收藏</Button>
+        <Button type="primary" size="small" long @click="removeColl">移出收藏</Button>
         </Col>
       </row>
     </div>
@@ -22,6 +22,33 @@
 </template>
 <script>
   export  default{
+    methods: {
+      /**
+       * 移出收藏夹
+       */
+      removeColl(){
+        this.$Modal.confirm({
+          title: '确认移除',
+          content: '确定要移出收藏夹吗？',
+          loading: true,
+          onOk: () => {
+            this.$store.dispatch('removeCollection', {goodsId: this.goodsId}).then(() => {
+              this.$Modal.remove();
+              this.doSuccess("移出成功");
+            }).catch(this.doError);
+          }
+        })
+      },
+      /**
+       * 加入购物车
+       */
+      addShopcar(){
+        this.$store.dispatch('addShopcar', {goodsId: this.goodsId}).then(() => {
+          this.$Modal.remove();
+          this.doSuccess("加入购物车成功");
+        }).catch(this.doError);
+      }
+    },
     props: {
       goodsId: {
         type: Number
@@ -43,12 +70,9 @@
         default: 150
       }
     },
-    methods:{
-
-    },
     data(){
       return {
-          hover:false
+        hover: false
       }
     }
 
@@ -95,8 +119,9 @@
     text-align: center;
     display: none;
   }
-  .adiplay{
-    display:block ;
+
+  .adiplay {
+    display: block;
   }
 
 

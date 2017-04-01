@@ -80,7 +80,8 @@ export default  {
    * 获取用户收藏夹信息
    * @returns {Promise}
    */
-  getCollection(){
+  getCollection({pnum, psize}){
+    console.log({pnum, psize});
     return new Promise((res, rej) => {
       setTimeout(() => {
         res([{
@@ -101,6 +102,18 @@ export default  {
       }, 1000)
     })
 
+  },
+
+  /**
+   * 获取收藏夹总数
+   * @returns {Promise}
+   */
+  getCollectionCount(){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res(20);
+      }, 1000)
+    })
   },
 
   /**
@@ -474,8 +487,8 @@ export default  {
    * @returns {Promise}
    */
   //0未付款1已付款2已发货3确认收货
-  getOrder({psize,pnum,label}){
-    if(label===''){
+  getOrder({psize, pnum, label}){
+    if (label === '') {
 
     }
     return new Promise((res, rej) => {
@@ -665,11 +678,11 @@ export default  {
    * @returns {Promise}
    */
   getOrderCount({label}){
-    if(label===''){
+    if (label === '') {
     }
     return new Promise((res, rej) => {
       setTimeout(() => {
-       res(5);
+        res(5);
       }, 1000)
     })
   },
@@ -695,8 +708,8 @@ export default  {
    * @param tag
    * @returns {Promise}
    */
-  commentOrder({ID,desc,star,tag}){
-    console.log({ID,desc,star,tag});
+  commentOrder({ID, desc, star, tag}){
+    console.log({ID, desc, star, tag});
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(5);
@@ -717,4 +730,28 @@ export default  {
     })
   },
 
+  /**
+   * 移出收藏夹
+   * @param goodsId
+   * @returns {Promise}
+   */
+  removeCollection({goodsId}){
+    return new Promise((rej, res) => {
+      setTimeout(() => {
+        rej(true);
+      }, 1000)
+    })
+  },
+  /**
+   * 加入购物车
+   * @param goodsId
+   * @returns {Promise}
+   */
+  addShopcar({goodsId}){
+    return new Promise((rej, res) => {
+      setTimeout(() => {
+        rej(true);
+      }, 1000)
+    })
+  }
 }

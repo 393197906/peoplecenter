@@ -10,6 +10,7 @@ export default {
     shipping: null,  //用户物流信息
     shopcar: null,   //用户购物车信息
     collection: null,  //用户收藏夹信息
+    collectionCount: null, //用户收藏夹总数
     growup: null,         //用户成长信息
     address: null,        //用户收货地址信息
     order: null,          //用户全部订单
@@ -38,6 +39,25 @@ export default {
      */
       [type.SET_INFO](state, {index, data}){
       state[index] = data;
+    },
+
+    /**
+     * 移出收藏夹
+     * @param state
+     * @param goodsId
+     */
+      [type.REMOVE_ONE_COLLECTION](state, {goodsId}){
+      for (let i = 0; i < state.collection.length; i++) {
+        if (state.collection[i].goodsId === goodsId) {
+          state.collection.splice(i, 1);
+          state.collectionCount--;
+          break;
+        }
+      }
+    },
+    //TODO
+    [type.ADD_ONE_SHOPCAR](state, {goodsId}){
+
     },
 
     /**
@@ -118,7 +138,7 @@ export default {
      * @param state
      * @param ID
      */
-    [type.CANCLE_ONE_ORDER](state, {ID}){
+      [type.CANCLE_ONE_ORDER](state, {ID}){
       let index = null;
       for (let i = 0; i < state.order0.length; i++) {
         if (state.order0[i].ID === ID) {
@@ -242,11 +262,18 @@ export default {
      * @param commit
      * @returns {Promise.<void>}
      */
-    async initCollection({commit}){
-      const collection = await service.getCollection();
+    async initCollection({commit}, {pnum, psize}){
+      pnum = pnum || 1;
+      psize = psize || 5;
+      const collection = await service.getCollection({pnum, psize});
+      const collectionCount = await service.getCollectionCount();
       commit(type.SET_INFO, {
         index: 'collection',
         data: collection
+      });
+      commit(type.SET_INFO, {
+        index: 'collectionCount',
+        data: collectionCount
       });
     },
     /**
@@ -271,7 +298,30 @@ export default {
     async updateUserInfo({dispatch}, userInfo){
       await service.updateUserInfo(userInfo);
       await dispatch('initUserInfo');
-    }
+    },
+
+    /**
+     * 移出收藏夹
+     * @param commit
+     * @param goodsId
+     * @returns {Promise.<void>}
+     */
+    async removeCollection({commit}, {goodsId}){
+      await service.removeCollection({goodsId});
+      commit(type.REMOVE_ONE_COLLECTION, {goodsId});
+    },
+
+    /**
+     * 加入购物车
+     * @param commit
+     * @param goodsId
+     * @returns {Promise.<void>}
+     */
+    async addShopcar({dispatch, commit}, {goodsId}){
+      await service.addShopcar({goodsId});
+      await dispatch('removeCollection', {goodsId});
+      await dispatch('initShopcar'); //更新购物车
+    },
 
   }
 }
